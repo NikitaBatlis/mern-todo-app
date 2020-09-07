@@ -1,0 +1,27 @@
+{
+  "name": "express",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "concurrently": "^5.2.0",
+    "cors": "^2.8.5",
+    "cookie-session": "1.3.3",
+    "express": "4.16.4",
+    "mongoose": "5.4.19",
+    "morgan": "~1.9.0",
+    "passport": "0.4.0",
+    "passport-google-oauth2": "0.2.0",
+    "passport-google-oauth20": "2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "1.17.3"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,62 @@
+body {
+  display: grid;
+  place-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center!important;
+} 
+
+.wrapper {
+  box-sizing: border-box;
+  margin: 3rem 0 0 0;
+}
+
+.welcomeContainer{
+  box-sizing: border-box;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 10px;
+  max-width: 40vw;
+  padding: 50px 25px 40px 25px;
+  margin: 3rem 0 0 0;
+
+}
+
+.welcomeHeader {
+  font-weight: bold;
+  font-size: 2rem;
+  padding-bottom: 10px;
+
+}
+
+.welcomeSubtext {
+  font-weight: lighter;
+  font-size: 1.5rem;
+  padding-bottom: 50px;
+
+}
+
+.todoContainer {
+  box-sizing: border-box;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 10px;
+  max-width: 40vw;
+  padding: 50px 25px 40px 25px;
+  margin: 3rem 0 0 0;
+}
+
+.todoHeader {
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding-bottom: 10px;
+}
+
+.todoInputLabel {
+  padding-top: 15px;
+}
+
+.buttonContainer {
+  padding-top: 15px;
+}
+
+.buttonContainer button:not(:first-child) {
+  margin-left: 5px;
+}
