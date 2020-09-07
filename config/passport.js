@@ -1,6 +1,6 @@
 const passport = require('passport');
 const GoogleStrat = require('passport-google-oauth20');
-const keys = require('./keys');//We have created keys.js to store our sensitive information including the clientSecret for our app. See keys.js
+const keys = require('./keys');//We have created keys.js to store our sensitive information including the clientSecret for our app. Add this file to .gitignore
 const User = require('../models/user.model.js');
 
 passport.serializeUser((user, done) => {
@@ -15,7 +15,7 @@ passport.deserializeUser((id, done) => {
 
 passport.use(new GoogleStrat({
         //options for stratergy
-        callbackURL: 'http://localhost:3001/login/redirect',
+        callbackURL: 'http://localhost:3001/api/login/redirect',
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret
     }, 

@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-router.get('/logout', (req, res) => {
+router.get('/api/logout', (req, res) => {
     req.session = null;
     req.logOut();
-    res.redirect('/');
+    res.redirect('http://localhost:3000/');
 })
 
 module.exports = router;

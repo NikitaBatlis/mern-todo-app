@@ -6,17 +6,19 @@ import Button from 'react-bootstrap/Button';
 
 export default function Dashboard() {
 
+  const [user, setUser] = useState({})
+  const [username, setUsername] = useState('');
   const [todoList, setTodoList] = useState([]);
   const todoInput = useRef();
 
+  //GET user data and set user, username, todolist
   useEffect(() => {
-    axios.get('/dashboard')
+    axios.get('/api/dashboard')
     .then(
       (res) => {
-        setTodoList({
-          username: res.data.username,
-          todoList: res.data.todolist
-        });
+        setTodoList(res.data.todolist != null ? res.data.todolist : []);
+        setUsername(res.data.username);
+        setUser(res.data)
       },
       (error) => {
         console.log(error);
@@ -24,7 +26,9 @@ export default function Dashboard() {
     )
   }, []);
 
+  //ADD todo and UPDATE database
   function handleAddTodo() {
+
     const newTodos = [...todoList];
     newTodos.push({
       id: generateId(),
@@ -32,38 +36,102 @@ export default function Dashboard() {
       complete: false
     });
     setTodoList(newTodos);
+        
+    const updatedUser = {
+      todolist: newTodos,
+      _id: user._id,
+      username: user.username,
+      googleID: user.googleID
+    }
+    setUser(updatedUser);
+
+    axios({
+      url:'http://localhost:3001/api/dashboard/update',
+      method:'PUT',
+      data: updatedUser
+    });
+    
     todoInput.current.value = null;
+
   }
 
-  function handleClearCompleted() {
-    setTodoList(todoList.filter(todo => !todo.complete));
-  }
-
+  //COMPLETED TOGGLE and UPDATE database
   function toggleTodoItem(id) {
     const newTodos = [...todoList];
     const targetTodo = newTodos.find(todo => todo.id === id);
     targetTodo.complete = !targetTodo.complete;
     setTodoList(newTodos);
+
+    const updatedUser = {
+      todolist: newTodos,
+      _id: user._id,
+      username: user.username,
+      googleID: user.googleID
+    }
+    setUser(updatedUser);
+
+    axios({
+      url:'http://localhost:3001/api/dashboard/update',
+      method:'PUT',
+      data: updatedUser
+    })
   }
 
+  //DELETE COMPLETED and UPDATE database
+  function handleClearCompleted() {
+    const newTodos = todoList.filter(todo => !todo.complete);
+    setTodoList(newTodos);
+   
+    const updatedUser = {
+      todolist: newTodos,
+      _id: user._id,
+      username: user.username,
+      googleID: user.googleID
+    }
+    setUser(updatedUser);
+
+    axios({
+      url:'http://localhost:3001/api/dashboard/update',
+      method:'PUT',
+      data: updatedUser
+    })
+
+  }
+
+  //DELETE todo and UPDATE database
   function deleteTodoItem(id) {
-    setTodoList(todoList.filter(todo => todo.id !== id));
+    const newTodos = todoList.filter(todo => todo.id !== id);
+    setTodoList(newTodos);
+    
+    const updatedUser = {
+      todolist: newTodos,
+      _id: user._id,
+      username: user.username,
+      googleID: user.googleID
+    }
+    setUser(updatedUser);
+
+    axios({
+      url:'http://localhost:3001/api/dashboard/update',
+      method:'PUT',
+      data: updatedUser
+    });
   }
 
     return(
-      <>
       <div className="todoContainer">
-        <div className="todoHeader">TODO</div>
+        <div className="todoHeader">Hi, {username}</div>
         <div className="completeCount"><b>{todoList.filter(todo => !todo.complete).length}</b>items left to complete</div>
         <TodoList todoList={todoList} toggleTodoItem={toggleTodoItem} deleteTodoItem={deleteTodoItem}/>
         <div className="todoInputLabel">What needs to be done?</div>
         <input className="formControl" type="text" ref={todoInput}/>
         <div className="buttonContainer">
-            <Button variant="primary" onClick={handleAddTodo}>Add Todo</Button>
+            <Button variant="info" onClick={handleAddTodo}>Add Todo</Button>
             <Button variant="secondary" onClick={handleClearCompleted}>Clear Completed</Button>
-            <Button variant="primary" size="lg">Logout</Button>
+        </div>
+        <div className="logoutButton">
+          <a href="http://localhost:3001/api/logout"><Button variant="light" size="md">Logout</Button></a>
         </div>
       </div>
-      </>
     )
   }

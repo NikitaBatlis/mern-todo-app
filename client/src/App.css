@@ -1,7 +1,7 @@
 body {
+  background-color: #ddf0f3!important;
   display: grid;
   place-items: center;
-  font-family: Arial, Helvetica, sans-serif;
   text-align: center!important;
 } 
 
@@ -11,10 +11,11 @@ body {
 }
 
 .welcomeContainer{
+  background-color: #FFFFFF;
   box-sizing: border-box;
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid #F0F8FF;
   border-radius: 10px;
-  max-width: 40vw;
+  min-width: 30vw;
   padding: 50px 25px 40px 25px;
   margin: 3rem 0 0 0;
 
@@ -31,26 +32,37 @@ body {
   font-weight: lighter;
   font-size: 1.5rem;
   padding-bottom: 50px;
-
 }
 
 .todoContainer {
+  background-color: #FFFFFF;
   box-sizing: border-box;
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid #e2e9f0;
   border-radius: 10px;
-  max-width: 40vw;
+  min-width: 30vw;
   padding: 50px 25px 40px 25px;
   margin: 3rem 0 0 0;
 }
 
 .todoHeader {
   font-weight: bold;
-  font-size: 1.5rem;
-  padding-bottom: 10px;
+  font-size: 2rem;
+  padding-bottom: 30px;
+}
+
+.completeCount {
+  padding-bottom: 15px;
 }
 
 .todoInputLabel {
   padding-top: 15px;
+}
+
+.formControl {
+  box-sizing: border-box;
+  border: 1px solid #abb5be;
+  border-radius: 5px;
+  width: 95%;
 }
 
 .buttonContainer {
@@ -59,4 +71,9 @@ body {
 
 .buttonContainer button:not(:first-child) {
   margin-left: 5px;
+}
+
+.logoutButton {
+  padding-top: 15px;
+
 }

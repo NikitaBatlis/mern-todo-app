@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const cors = require('cors');
@@ -12,6 +14,9 @@ const passportSetup = require('./config/passport');
 
 //Express MODULES in use.
 app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(cookieSession({ maxAge: 24 * 60 *60 * 1000, keys: [keys.session.cookieKey]}));
 app.use(passport.initialize());
 app.use(passport.session());
